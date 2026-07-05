@@ -1,0 +1,21 @@
+services:
+  api:
+    build: .
+    container_name: rate-limiter-api
+
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis-server
+
+    ports:
+      - "6379:6379"
